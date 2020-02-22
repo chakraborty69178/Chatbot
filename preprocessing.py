@@ -20,7 +20,7 @@ def getMoveCorpus(lines, conv):
     #creating Dictnary tht maps each lines with its id
     id2line = {}
     for line in lines:
-        _lines =  line.split(" +++$+++ ")
+        _line =  line.split(" +++$+++ ")
         # Getting the records which shure to have all attribute present to reduce missing data and noice
         if len(_line) == 5:
             id2line[_line[0]] =_line[4]
@@ -46,18 +46,18 @@ def getMoveCorpus(lines, conv):
     
     # cleaned Answers
     for answer in answers:
-        cleaned_answers.append(clean_text(answers))
+        cleaned_answers.append(clean_text(answer))
     
     #Reducing the number of words occered less
     word2count = {}
     for question in cleaned_questions:
-        for word in question:
+        for word in question.split():
             if word not in word2count:
                 word2count[word] =1
             else:
                 word2count[word] += 1             
     for answer in cleaned_answers:
-        for word in answer:
+        for word in answer.split():
             if word not in word2count:
                 word2count[word] =1
             else:
@@ -94,22 +94,22 @@ def getMoveCorpus(lines, conv):
     questions_into_int = [] 
     for questions in cleaned_questions:
         ints = []
-        for word in question.split():
+        for word in questions.split():
             if word not in questionswords2int:
                 ints.append(questionswords2int['<OUT>'])
             else:
                 ints.append(questionswords2int[word])
-            questions_into_int.append(ints)
-     answers_into_int = [] 
+        questions_into_int.append(ints)
+    answers_into_int = [] 
     for answer in cleaned_answers:
         ints = []
-        for word in question.split():
+        for word in answer.split():
             if word not in answerswords2int:
                 ints.append(answerswords2int['<OUT>'])
             else:
-                ints.append(qiestionswords2int[word])
-            answers_into_int.append(ints)
-    return cleaned_datasetX,cleaned_answers,questionswords2int,answerswords2int,answersint2word
+                ints.append(questionswords2int[word])
+        answers_into_int.append(ints)
+    return questions_into_int,answers_into_int,questionswords2int,answerswords2int,answersint2word
 
 
 
