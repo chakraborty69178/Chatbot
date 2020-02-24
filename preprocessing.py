@@ -164,6 +164,6 @@ def clean_text(text):
     text = re.sub(r"\'re" , "are", text)
     text = re.sub(r"won't" , "wont", text)
     text = re.sub(r"can't" , "cannot", text)
-    text = re.sub( r"[-()\"#/@;:.{}+-^|]" , "", text)
+    text = re.sub( r"[-()\"#/@;:.{}+-^|_]" , "", text)
     cleaned_line = text                 
     return cleaned_line
