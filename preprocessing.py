@@ -113,11 +113,11 @@ def getMoveCorpus(lines, conv):
     #Sorting all the Question lista nd answer list for Optimization perpose
     sorted_questions =[]
     sorted_answers=[]
-    for i in range(1,25):
-        for j in range(0, len(questions_into_int)-1):
-            if len(questions_into_int[j]) == i:
-                sorted_questions.append(questions_into_int[j])
-                sorted_answers.append(answers_into_int[j])
+    for i in range(1,25+1):
+        for j in enumerate(questions_into_int):
+            if len(j[1]) == i:
+                sorted_questions.append(questions_into_int[j[0]])
+                sorted_answers.append(answers_into_int[j[0]])
     
     return sorted_questions,sorted_answers,questionswords2int,answerswords2int,answersint2word
 
